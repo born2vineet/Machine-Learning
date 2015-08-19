@@ -21,10 +21,16 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
-
-
-
-
+for i = 1:length(X)  % loop over every training example 
+    deltas = zeros(K,1); % Set distance between xi and cj = 0
+    x = X(i,:);   % x = ith training example
+    for j = 1:K   % go over every index of cluster centroid
+        k = centroids(j,:);   % k = jth index of cluster centroid 
+        delta = x-k;   % compute xi - cj
+        deltas(j) = delta * delta';
+    end
+    [y, idx(i)] = min(deltas); % return the index of centroid which has minimum value of (xi - cj)
+end
 
 
 % =============================================================
