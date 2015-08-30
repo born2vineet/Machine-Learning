@@ -41,8 +41,14 @@ Theta_grad = zeros(size(Theta));
 %
 
 
+err = (X * Theta') - Y;
+J_temp = err .^2;
+reg = (lambda / 2) * (sum(sum(Theta .^2)) + sum(sum(X .^ 2))); % regularization term
 
+J = sum(sum(R .* J_temp))/2 + reg; % calculate the error term only for those ratings where R(i,j) == 1 
 
+X_grad = (err .* R) * Theta + (lambda * X); 
+Theta_grad = (err .* R)' * X + (lambda * Theta); 
 
 
 
